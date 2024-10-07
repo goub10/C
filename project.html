@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>معرفة معلومات الجهاز</title>
+    <script>
+        function detectDevice() {
+            var userAgent = navigator.userAgent;
+            var deviceName = "غير معروف";
+            var deviceModel = "غير معروف";
+
+            // تحديد الجهاز بناءً على الـ User-Agent
+            if (/android/i.test(userAgent)) {
+                var match = userAgent.match(/Android.*; ([^;]+) Build/);
+                if (match) {
+                    deviceName = match[1].split(' ')[0];  // على سبيل المثال "Samsung"
+                    deviceModel = match[1];  // على سبيل المثال "Samsung Galaxy S21"
+                }
+            } else if (/iPhone/i.test(userAgent)) {
+                deviceName = "Apple";
+                deviceModel = "iPhone";  // للأسف لا يعرض الـ User-Agent موديلات iPhone
+            } else if (/iPad/i.test(userAgent)) {
+                deviceName = "Apple";
+                deviceModel = "iPad";
+            } else if (/iPod/i.test(userAgent)) {
+                deviceName = "Apple";
+                deviceModel = "iPod";
+            } else if (/Windows/i.test(userAgent)) {
+                deviceName = "Windows";
+                deviceModel = "غير معروف";
+            } else if (/Mac/i.test(userAgent)) {
+                deviceName = "Apple";
+                deviceModel = "غير معروف";
+            } else if (/Linux/i.test(userAgent)) {
+                deviceName = "Linux";
+                deviceModel = "غير معروف";
+            }
+
+            document.getElementById("device-info").innerHTML = 
+                deviceName + "<br>" + 
+                deviceModel;
+        }
+    </script>
+</head>
+<body onload="detectDevice()">
+    <p id="device-info"></p>
+</body>
+</html>
